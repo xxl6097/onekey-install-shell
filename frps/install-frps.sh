@@ -17,13 +17,13 @@ program_version_link="https://raw.githubusercontent.com/xxl6097/onekey-install-s
 str_install_shell=https://raw.githubusercontent.com/xxl6097/onekey-install-shell/master/frps/install-frps.sh
 shell_update(){
     fun_clangcn "clear"
-    echo "Check updates for shell..."
+    echo "Check updates for shell...5"
     remote_shell_version=`wget --no-check-certificate -qO- ${str_install_shell} | sed -n '/'^version'/p' | cut -d\" -f2`
     if [ ! -z ${remote_shell_version} ]; then
         if [[ "${version}" != "${remote_shell_version}" ]];then
             echo -e "${COLOR_GREEN}Found a new version,update now!!!${COLOR_END}"
             echo
-            echo -n "Update shell ..."
+            echo -n "Update shell ...6"
             if ! wget --no-check-certificate -qO $0 ${str_install_shell}; then
                 echo -e " [${COLOR_RED}failed${COLOR_END}]"
                 echo
@@ -149,7 +149,7 @@ pre_install_packs(){
     netstat --version >/dev/null 2>&1
     netstat_flag=$?
     if [[ ${wget_flag} -gt 1 ]] || [[ ${killall_flag} -gt 1 ]] || [[ ${netstat_flag} -gt 6 ]];then
-        echo -e "${COLOR_GREEN} Install support packs...${COLOR_END}"
+        echo -e "${COLOR_GREEN} Install support packs...7${COLOR_END}"
         if [ "${OS}" == 'CentOS' ]; then
             yum install -y wget psmisc net-tools
         else
@@ -206,7 +206,7 @@ fun_getServer(){
     echo "---------------------------------------"
 }
 fun_getVer(){
-    echo -e "Loading network version for ${program_name}, please wait..."
+    echo -e "Loading network version for ${program_name}, please wait...8"
     program_latest_filename="frp_${FRPS_VER}_linux_${ARCHS}.tar.gz"
     program_latest_file_url="${program_download_url}/v${FRPS_VER}/${program_latest_filename}"
     if [ -z "${program_latest_filename}" ]; then
@@ -330,7 +330,7 @@ fun_input_max_pool_count(){
 }
 pre_install_clang(){
     fun_clangcn
-    echo -e "Check your server setting, please wait..."
+    echo -e "Check your server setting, please wait...9"
     disable_selinux
     if [ -s ${str_program_dir}/${program_name} ] && [ -s ${program_init} ]; then
         echo "${program_name} is installed!"
@@ -340,7 +340,7 @@ pre_install_clang(){
         fun_get_version
         fun_getServer
         fun_getVer
-        echo -e "Loading You Server IP, please wait..."
+        echo -e "Loading You Server IP, please wait...10"
         defIP=$(wget -qO- ip.clang.cn | sed -r 's/\r//')
         echo -e "You Server IP:${COLOR_GREEN}${defIP}${COLOR_END}"
         echo -e  "${COLOR_YELOW}Please input your server setting:${COLOR_END}"
@@ -495,7 +495,7 @@ pre_install_clang(){
         echo -e "Log file           : ${COLOR_GREEN}${str_log_file_flag}${COLOR_END}"
         echo "=============================================="
         echo ""
-        echo "Press any key to start...or Press Ctrl+c to cancel"
+        echo "Press any key to start.1.or Press Ctrl+c to cancel"
 
         char=`get_char`
         install_program_server_clang
@@ -507,7 +507,7 @@ install_program_server_clang(){
     cd ${str_program_dir}
     echo "${program_name} install path:$PWD"
 
-    echo -n "config file for ${program_name} ..."
+    echo -n "config file for ${program_name} ...11"
 # Config file
 if [[ "${set_kcp}" == "false" ]]; then
 cat > ${str_program_dir}/${program_config_file}<<-EOF
@@ -578,11 +578,11 @@ EOF
 fi
     echo " done"
 
-    echo -n "download ${program_name} ..."
+    echo -n "download ${program_name} ...1"
     rm -f ${str_program_dir}/${program_name} ${program_init}
     fun_download_file
     echo " done"
-    echo -n "download ${program_init}..."
+    echo -n "download ${program_init}...2"
     if [ ! -s ${program_init} ]; then
         if ! wget --no-check-certificate -q ${FRPS_INIT} -O ${program_init}; then
             echo -e " ${COLOR_RED}failed${COLOR_END}"
@@ -592,7 +592,7 @@ fi
     [ ! -x ${program_init} ] && chmod +x ${program_init}
     echo " done"
 
-    echo -n "setting ${program_name} boot..."
+    echo -n "setting ${program_name} boot...3"
     [ ! -x ${program_init} ] && chmod +x ${program_init}
     if [ "${OS}" == 'CentOS' ]; then
         chmod +x ${program_init}
@@ -804,7 +804,7 @@ update_program_server_clang(){
             fi
         fi
         [ ! -d ${str_program_dir} ] && mkdir -p ${str_program_dir}
-        echo -e "Loading network version for ${program_name}, please wait..."
+        echo -e "Loading network version for ${program_name}, please wait...4"
         fun_getServer
         fun_getVer >/dev/null 2>&1
         local_program_version=`${str_program_dir}/${program_name} --version`
