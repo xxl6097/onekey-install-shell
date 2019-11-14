@@ -220,7 +220,6 @@ fun_download_file(){
     if [ ! -s ${str_program_dir}/${program_name} ]; then
         rm -fr ${program_latest_filename} frp_${FRPS_VER}_linux_${ARCHS}
 		
-		echo -e " url:${program_latest_file_url}"
 		
 		
         if ! wget --no-check-certificate -q ${program_latest_file_url} -O ${program_latest_filename}; then
@@ -582,6 +581,7 @@ EOF
 fi
     echo " done"
 
+    echo -e " url:${program_latest_file_url}"
     echo -n "download ${program_name} ...1"
     rm -f ${str_program_dir}/${program_name} ${program_init}
     fun_download_file
