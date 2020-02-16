@@ -167,7 +167,7 @@ fun_randstr(){
 }
 fun_get_version(){
     rm -f ${ver_file}
-    if ! wget --no-check-certificate -qO ${ver_file} ${program_version_link}; then
+    if ! wget --no-check-certificate  ${ver_file} ${program_version_link}; then
         echo -e "${COLOR_RED}Failed to download version.sh${COLOR_END}"
     fi
     if [ -s ${ver_file} ]; then
